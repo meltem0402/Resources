@@ -84,31 +84,9 @@
         <connector>
             <targetReference>create_contact</targetReference>
         </connector>
-        <filterLogic>1 and  ( 2 AND 3 )</filterLogic>
-        <filters>
-            <field>Contact__c</field>
-            <operator>IsNull</operator>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
-        </filters>
-        <filters>
-            <field>Opportunity__c</field>
-            <operator>IsNull</operator>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
-        </filters>
-        <filters>
-            <field>Active__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>Yes</stringValue>
-            </value>
-        </filters>
         <object>Account</object>
         <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
 </Flow>
