@@ -34,6 +34,29 @@ public class AccountTriggerHandler {
         insert conList;
        
     }
-    
+    public static void checkboxAccount(List<Account> accList){
+        List<Contact> conList = new List<Contact>();
+        List<Opportunity> oppList = new List<Opportunity>();
+        
+        for(Account acc : accList){
+            if(acc.Contact__c){
+            Contact con = new Contact();
+            con.AccountId = acc.Id;
+            con.LastName = acc.Name;
+            conList.add(con);
+            }
+            if(acc.Active__c == 'Yes' && acc.Opportunity__c){
+            Opportunity opp = new Opportunity();
+            opp.AccountId = acc.Id;
+            opp.Name = acc.Name;
+            opp.StageName = 'Qualification';
+            opp.CloseDate = date.today();
+            oppList.add(opp);
+            }
+            
+        }
+        insert conList;
+        insert oppList;
+    }
     
     }
