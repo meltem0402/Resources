@@ -1,11 +1,13 @@
 public class AccountTriggerHandler {
-    public static void ratingUpdate(List<Account> accList){
-        for(Account acc: accList){
-        if(acc.Industry != null && acc.Industry == 'Media'){
+    public static void ratingUpdate(List<Account> upList,List<Account> accList){
+        for(Account acc: upList){
+        if((accList == null && acc.Industry != null && acc.Industry == 'Media') 
+            || (acc.Industry != null && acc.Industry == 'Media' && acc.Industry != accList[0].Industry)){
             acc.Rating = 'Hot';
         }
     }
     }
+   
     public static void relatedOpp(List<Account> accList){
         List<Opportunity> oppList = new List<Opportunity>();
         for(Account acc : accList){
@@ -57,6 +59,27 @@ public class AccountTriggerHandler {
         }
         insert conList;
         insert oppList;
+    }
+    public static void updateAccountPhone(List<Account> accList, List<Account> upList){
+        for(Account acc: accList){
+            if(accList != null  &&  accList[0].Phone != upList[0].Phone){
+                acc.Description = 'Phone is updated';
+                
+            }
+                
+            }
+        }
+    public static void copyBillingAddress(List<Account> newList , List<Account> accList){
+        for(Account acc : newList){
+            if((accList == null && acc.CopyBillingToShipping__c) 
+               || ( acc.CopyBillingToShipping__c && acc.CopyBillingToShipping__c != accList[0].CopyBillingToShipping__c)){
+          acc.ShippingStreet = acc.BillingStreet;
+          acc.ShippingCity = acc.BillingCity;
+          acc.ShippingCountry = acc.BillingCountry;
+          acc.ShippingPostalCode = acc.BillingPostalCode;
+          acc.ShippingState = acc.BillingState;  
+            }
+        }
     }
     
     }
