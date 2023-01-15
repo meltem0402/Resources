@@ -20,4 +20,23 @@ public class OpportunityTriggerHandler {
     }
 }
 }
+    public static void UpdateDescriptionStage(List<Opportunity> oppList, Map<Id, Opportunity> oldMap){
+        for(Opportunity opp : oppList){
+            if(oldMap == null || opp.StageName != oldMap.get(opp.Id).StageName){
+                if(opp.Description == 'Closed Won'){
+                    opp.Description = 'Opportunity is Closed Won';
+                }else if(opp.Description == 'Closed Lost'){
+                    opp.Description = 'Closed Lost';
+                }else{
+                    opp.Description = 'Opportunity is Open';
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
+    }
 }
