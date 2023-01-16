@@ -81,5 +81,29 @@ public class AccountTriggerHandler {
             }
         }
     }
+    public static void accPhoneUpdateRelatedCon(List<Account> accList, Map<Id, Account> OldAccMap){
+        List<Contact> conList = new List<Contact>();
+        Map<Id, Account> accToAccountMap = new Map<Id, Account>();
+        
+        for(Account acc : accList){
+            if(acc.Phone != null && acc.Phone != oldAccMap.get(acc.Id).Phone && OldAccMap != null){
+               accToAccountMap.put(acc.Id, acc);
+                
+            }
+        }
+        
+        if(accToAccountMap.size()>0){
+            for(Contact con : [SELECT Id, HomePhone, AccountId FROM Contact 
+                               WHERE AccountId IN : accToAccountMap.keyset()]){
+                if(accToAccountMap.containsKey(con.AccountId)){
+                    con.HomePhone = accToAccountMap.get(con.AccountId).Phone;
+                    conList.add(con);
+                }
+            }
+        }
+        if(conList.size()>0){
+            update conList;
+        }
+    }
     
     }

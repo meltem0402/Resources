@@ -1,4 +1,4 @@
-trigger AccIndustryTrigger on Account (before insert,after insert,before update) {
+trigger AccIndustryTrigger on Account (before insert,after insert,before update, after update) {
     if(Trigger.isInsert){
         if(Trigger.isBefore){
             AccountTriggerHandler.ratingUpdate(Trigger.New ,null);
@@ -8,14 +8,20 @@ trigger AccIndustryTrigger on Account (before insert,after insert,before update)
            //AccountTriggerHandler.relatedOpp(Trigger.New);
             //AccountTriggerHandler.relatedContact(Trigger.new);
             //AccountTriggerHandler.checkboxAccount(Trigger.new);
+            
         
         }
     }
         if(Trigger.isUpdate){
             if(Trigger.IsBefore){
                 //AccountTriggerHandler.updateAccountPhone(Trigger.new , Trigger.Old);
-                AccountTriggerHandler.copyBillingAddress(Trigger.New, Trigger.Old);          }
-                 AccountTriggerHandler.ratingUpdate(Trigger.New ,Trigger.Old);
-}  
+                //AccountTriggerHandler.copyBillingAddress(Trigger.New, Trigger.Old);          }
+                 //AccountTriggerHandler.ratingUpdate(Trigger.New ,Trigger.Old);
+                 
+            } else if(Trigger.IsAfter){
+             AccountTriggerHandler.accPhoneUpdateRelatedCon(Trigger.New ,Trigger.OldMap);
+                
+            }
     
+}
 }
