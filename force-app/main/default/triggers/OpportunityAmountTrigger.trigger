@@ -1,4 +1,4 @@
-trigger OpportunityAmountTrigger on Opportunity (before insert,after insert , before update) {
+trigger OpportunityAmountTrigger on Opportunity (before insert,after insert,before update, after update) {
     if(Trigger.isInsert){
         if(Trigger.isBefore){
           //OpportunityTriggerHandler.updateDescription(Trigger.New);
@@ -10,6 +10,8 @@ trigger OpportunityAmountTrigger on Opportunity (before insert,after insert , be
     if(Trigger.isUpdate){
         if(Trigger.isBefore){
             OpportunityTriggerHandler.UpdateDescriptionStage(Trigger.New, Trigger.OldMap);
+        }else if(Trigger.isAfter){
+            OpportunityTriggerHandler.createTask(Trigger.New, Trigger.oldMap);
         }
     }
 }

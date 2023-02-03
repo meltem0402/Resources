@@ -32,11 +32,23 @@ public class OpportunityTriggerHandler {
                 }
             }
         }
+        }
+    public static void createTask(List<Opportunity> oppList, Map<Id,Opportunity> oldMap){
+        List<Task> taskList = new List<Task>();
         
-        
-        
-        
-        
-        
+        for(Opportunity opp: oppList){
+            if(opp.StageName != OldMap.get(opp.Id).StageName){
+                Task t = new Task();
+                t.WhatId = Opp.Id;
+                t.Subject = 'Demo';
+                t.Priority = 'Normal';
+                t.Status = 'Not Started';
+                t.OwnerId = opp.OwnerId;
+                tasklist.add(t);
+            }
+        }
+        if(!taskList.isEmpty()){
+            insert taskList;
+        }
     }
 }
