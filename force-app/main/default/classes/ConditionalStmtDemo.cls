@@ -35,14 +35,17 @@ public class ConditionalStmtDemo {
     }
     
     public static void max(Integer num1, Integer num2){
-        //Integer num1 = 20, num2 = 40;
+       
+        Integer result;
+        result = num1>num2 ? num1 : num2;
+            System.debug('Maximum = ' + result);
         
-        if(num1>num2){
+        /*if(num1>num2){
             System.debug('Num1 is max as compared to Num2');
             
         }else{
             System.debug('Num2 is max as compared to Num1');
-        }
+        }*/
     }
     public static void checkEligibility(Integer age){
         if(age>=18){
