@@ -1,4 +1,26 @@
 public class SOQLDemo {
+    
+    public static void parentToChildDemo() {
+        
+        List<Account> accList = [SELECT Id,Name,(Select Id,FirstName, LastName FROM Contacts)
+                                 FROM Account WHERE Rating = 'Hot'];
+        
+        for(Account acc : accList){
+            System.debug('Account Name : '+acc.Name);
+            for(Contact con : acc.Contacts){
+                System.debug(con.FirstName + ' ' + con.LastName);
+            }
+        }
+    }
+    
+    public static void aggDemo(){
+        AggregateResult[] groupedResults = [SELECT Account.Name, Sum(Amount) FROM Opportunity GROUP BY Account.Name];
+        System.debug(groupedResults );
+        for( AggregateResult ar : groupedResults){
+            System.debug('Account ID = ' + ar.get('Name'));
+            System.debug('Sum of Amount ' + ar.get('expro0'));
+        }
+    }
     public static void queryDemo1(){
         
         String indus = 'Energy';
